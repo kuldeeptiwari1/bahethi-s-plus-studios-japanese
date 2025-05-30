@@ -1,0 +1,256 @@
+/* .left{
+    height: 40vh;
+    width: 100%;
+    background-color: bisque;
+} */
+
+@font-face {
+  font-family: monument;
+  src: url(/Fonts/MonumentExtended-Regular.otf);
+}
+
+
+
+
+
+
+
+
+
+
+.artistsHeading {
+  font-size: 40px;
+  font-weight: 800;
+  text-align: center;
+  font-family: monument;
+  /* margin-top: 90px;
+  margin-left: -50px; */
+}
+.paint-order {
+  paint-order: stroke fill;
+}
+.our {
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 0.9;
+  color: #ff66c4;
+  -webkit-text-stroke: 3px #1e5175;
+  text-shadow: 3px 3px #1e5175;
+  margin: 0px 6px;
+}
+.team {
+  text-transform: uppercase;
+  font-weight: 900;
+
+  line-height: 0.9;
+  color: #97cfca;
+  -webkit-text-stroke: 3px #1e5175;
+  text-shadow: 3px 3px #1e5175;
+  margin: 0px 6px;
+}
+.of {
+  text-transform: uppercase;
+  font-weight: 900;
+
+  line-height: 0.9;
+  color: white;
+  -webkit-text-stroke: 3px #1e5175;
+  text-shadow: 3px 3px #1e5175;
+  margin: 0px 6px;
+}
+.artists {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 0.9;
+  color: #91c4f6;
+  -webkit-text-stroke: 8px #1e5175;
+  text-shadow: 4px 4px #1e5175;
+  margin: 0px 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE STYLES------------------------------------------------------------------------------------------------------- */
+/* @font-face {
+  font-family: monument;
+  src: url(../../../public/Fonts/MonumentExtended-Regular.otf);
+}
+
+.UpperRight,
+.UpperLeft {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0px;
+  flex-wrap: wrap;
+}
+
+.right,
+.left {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  gap: 30px;
+  padding: 20px 0px;
+  flex-wrap: wrap;
+}
+
+.rightPara,
+.leftPara {
+  font-size: 15px;
+  width: 45%;
+}
+
+.rightPara p,
+.leftPara p {
+  text-align: center;
+}
+
+.rightImg img,
+.leftImg img {
+  height: 260px;
+  width: auto;
+}
+
+.leftImgBottom img {
+  height: 120px;
+  width: auto;
+  margin-top: 100px;
+  margin-right: 30px;
+}
+
+.topImg img {
+  height: 250px;
+  width: auto;
+}
+
+.artistsHeading {
+  font-size: 40px;
+  text-align: center;
+  font-family: monument;
+  margin-top: 90px;
+  margin-left: -50px;
+}
+
+.paint-order {
+  paint-order: stroke fill;
+}
+
+.our,
+.team,
+.of,
+.artists {
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 0.9;
+  text-shadow: 3px 3px #1e5175;
+  margin: 0px 6px;
+}
+
+.our {
+  color: #ff66c4;
+  -webkit-text-stroke: 3px #1e5175;
+}
+
+.team {
+  color: #97cfca;
+  -webkit-text-stroke: 3px #1e5175;
+}
+
+.of {
+  color: white;
+  -webkit-text-stroke: 3px #1e5175;
+}
+
+.artists {
+  font-size: 60px;
+  color: #91c4f6;
+  -webkit-text-stroke: 8px #1e5175;
+  text-shadow: 4px 4px #1e5175;
+}
+
+
+@media (max-width: 1024px) {
+  .right,
+  .left {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .rightPara,
+  .leftPara {
+    width: 80%;
+    font-size: 14px;
+  }
+
+  .artistsHeading {
+    font-size: 30px;
+    margin-left: 0;
+  }
+
+  .artists {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rightPara,
+  .leftPara {
+    width: 90%;
+    font-size: 13px;
+  }
+
+  .leftImgBottom img {
+    margin-top: 50px;
+    height: 100px;
+  }
+
+  .topImg img {
+    height: 200px;
+  }
+
+  .artistsHeading {
+    font-size: 24px;
+  }
+
+  .artists {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rightPara,
+  .leftPara {
+    font-size: 12px;
+  }
+
+  .leftImgBottom img {
+    height: 80px;
+  }
+
+  .artistsHeading {
+    font-size: 20px;
+  }
+
+  .artists {
+    font-size: 30px;
+    -webkit-text-stroke: 4px #1e5175;
+  }
+} */

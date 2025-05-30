@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'edo';
+    src: url('../../assets/edo.ttf') format('truetype');
+  }
+  
+  .font-edo {
+    font-family: 'edo';
+    font-size: 5rem;
+    font-weight: 400;
+    color: black;
+  }
+  .font-edos {
+    font-family: 'edo';
+    font-size: 3rem;
+    font-weight: 400;
+    color: black;
+  }

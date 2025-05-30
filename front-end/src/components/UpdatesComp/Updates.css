@@ -1,0 +1,280 @@
+/* Base styles - Your Original CSS */
+.topUpdates {
+    /* height: 20vh; */
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* padding: 0px 80px; */
+  }
+  
+  .topUpdates h1 {
+    font-size: 4.5rem;
+    margin-left: 30px;
+    color: #cc5e45;
+    -webkit-text-stroke: 2px #1e5175;
+    text-shadow: 2px 2px #1e5175;
+    font-weight: 900;
+  }
+  
+  .middleUpdates {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    padding: 0px 100px;
+  }
+  
+  .leftUpdates {
+    width: 40%;
+  }
+  .leftUpdates p {
+    line-height: 45px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+  .rightUpdates {
+    width: 30%;
+    margin-left: 70px;
+    margin-top: 7%;
+    position: relative;
+  }
+  
+  .bottomUpdates {
+    height: 30vh;
+    width: 100%;
+    position: absolute;
+    bottom: -300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .bottomUpdates h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #cc5e45;
+    -webkit-text-stroke: 3px #1e5175;
+    text-shadow: 2px 2px #1e5175;
+  }
+  
+  .paint-order {
+    paint-order: stroke fill;
+  }
+  
+  .socialIcons {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .icon {
+    height: 65px;
+    width: 65px;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
+    border-radius: 50%;
+  }
+  
+  .lastUpdates {
+    height: 55vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 90px;
+  }
+  
+  /* Responsive Styles */
+  
+  /* Small Mobile devices (max-width: 480px) */
+  @media (max-width: 480px) {
+    .topUpdates {
+      padding: 10px;
+      flex-direction: column;
+      align-items: center;
+
+    }
+  
+    .topUpdates h1 {
+      font-size: 2.5rem;
+      margin-left: 0;
+    }
+  
+    .middleUpdates {
+      flex-direction: column;
+      padding: 10px 25px;
+    }
+  
+    .leftUpdates {
+      width: 100%;
+    }
+  
+    .leftUpdates p {
+      font-size: 1rem;
+      line-height: 25px;
+    }
+  
+    .rightUpdates {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rightUpdates img{
+        height: 350px;
+        width: auto;
+
+    }
+  
+    .bottomUpdates {
+      height: auto;
+      position: relative;
+      bottom: 75px;
+      padding: 10px 20px;
+
+    }
+  .text-bottomUpdates{
+    padding: 10px 20px;
+  }
+    .bottomUpdates h1 {
+      font-size: 2.3rem;
+      text-align: center;
+    }
+  
+    .socialIcons {
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+  
+    .icon {
+      height: 40px;
+      width: 40px;
+      font-size: 25px;
+    }
+  
+    .lastUpdates {
+      margin-top: 30px;
+      justify-content: center;
+      /* padding: 5px; */
+    }
+  }
+  
+  /* Medium Mobile devices (481px to 640px) */
+  @media (min-width: 481px) and (max-width: 640px) {
+    .topUpdates h1 {
+      font-size: 2.5rem;
+    }
+  
+    .middleUpdates {
+      padding: 20px;
+    }
+  
+    .leftUpdates p {
+      font-size: 1.1rem;
+    }
+  
+    .bottomUpdates h1 {
+      font-size: 2.5rem;
+    }
+  
+    .icon {
+      height: 50px;
+      width: 50px;
+      font-size: 30px;
+    }
+  }
+  
+  /* Tablets (641px to 1024px) */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .topUpdates h1 {
+      font-size: 3rem;
+    }
+  
+    .middleUpdates {
+      flex-direction: column;
+      padding: 30px;
+    }
+  
+    .leftUpdates {
+      width: 100%;
+    }
+  
+    .rightUpdates {
+      width: 80%;
+      /* margin-left: 0; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+   
+    .bottomUpdates h1 {
+      font-size: 3rem;
+
+    }
+  
+    .icon {
+      height: 55px;
+      width: 55px;
+      font-size: 35px;
+    }
+  
+    .lastUpdates {
+      margin-top: 70px;
+      justify-content: center;
+      /* padding: 20px; */
+    }
+    .text-bottomUpdates{
+        padding: 0px 30px;
+    }
+  }
+  
+  /* Laptops (1025px to 1440px) */
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    .topUpdates h1 {
+      font-size: 4rem;
+    }
+  
+    .middleUpdates {
+      padding: 50px;
+    }
+  
+    .bottomUpdates h1 {
+      font-size: 3.5rem;
+    }
+  
+    .icon {
+      height: 60px;
+      width: 60px;
+      font-size: 37px;
+    }
+  }
+  
+  /* Large Screens (1441px and above) */
+  @media (min-width: 1441px) {
+    .topUpdates h1 {
+      font-size: 4.5rem;
+    }
+  
+    .bottomUpdates h1 {
+      font-size: 4rem;
+    }
+  
+    .icon {
+      height: 65px;
+      width: 65px;
+      font-size: 40px;
+    }
+  }
+  
