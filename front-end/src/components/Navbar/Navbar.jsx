@@ -259,31 +259,31 @@ export default function Navbar({ isWhite }) {
           {/* Navigation Links */}
           <div className="flex flex-col gap-2 mt-12">
             <Link to="/our-vision" className="block py-2 hover:bg-gray-100">
-              Our Vision
+              私たちのビジョン
             </Link>
             <Link to="/our-artists" className="block py-2 hover:bg-gray-100">
-              Our Artists
+              アーティスト紹介
             </Link>
             <Link to="/join-us" className="block py-2 hover:bg-gray-100">
-              Join Us
+              チームに参加しよう
             </Link>
             <Link to="/comiket-preorder" className="block py-2 hover:bg-gray-100">
-              Comiket Pre-Order
+              コミケ予約
             </Link>
             <Link to="/photos-of-no-one" className="block py-2 hover:bg-gray-100">
-              Photos of No One Pre-Order
+              誰の写真
             </Link>
             <Link to="/updates" className="block py-2 hover:bg-gray-100">
-              Blog
+              ブログ
             </Link>
             <Link to="/demon-girl-light-novel" className="block py-2 hover:bg-gray-100">
-              Demon Girl Light Novel
+              デーモンガールライトノベル
             </Link>
             <Link to="/kishore" className="block py-2 hover:bg-gray-100">
-              Kishore
+              キショール
             </Link>
             <Link to="/donate" className="block py-2 hover:bg-gray-100">
-              Donate
+              寄付
             </Link>
           </div>
         </div>
@@ -297,7 +297,7 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("about")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            ABOUT US
+            私たちについて
           </button>
           {openDropdown === "about" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
@@ -305,16 +305,16 @@ export default function Navbar({ isWhite }) {
                 to="/our-vision"
                 className="block px-4 py-2 hover:bg-gray-100"
               >
-                Our Vision
+                私たちのビジョン
               </Link>
               <Link
                 to="/our-artists"
                 className="block px-4 py-2 hover:bg-gray-100"
               >
-                Our Artists
+                アーティスト紹介
               </Link>
               <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100">
-                Join Us
+                チームに参加しよう
               </Link>
             </div>
           )}
@@ -326,7 +326,7 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("merch")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            MERCH
+            グッズ
           </button>
           {openDropdown === "merch" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
@@ -334,13 +334,13 @@ export default function Navbar({ isWhite }) {
                 to="/comiket-preorder"
                 className="block px-4 py-2 hover:bg-gray-100"
               >
-                Comiket Pre-Order
+                コミケ予約
               </Link>
               <Link
                 to="/photos-of-no-one"
                 className="block px-4 py-2 hover:bg-gray-100"
               >
-                Photos of No One Pre-Order
+                誰の写真
               </Link>
             </div>
           )}
@@ -352,12 +352,12 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("updates")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            UPDATES
+            最新情報
           </button>
           {openDropdown === "updates" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link to="/updates" className="block px-4 py-2 hover:bg-gray-100">
-                Blog
+                ブログ
               </Link>
             </div>
           )}
@@ -369,7 +369,7 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("light-novels")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            LIGHT NOVEL
+            ライトノベル
           </button>
           {openDropdown === "light-novels" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
@@ -377,7 +377,7 @@ export default function Navbar({ isWhite }) {
                 to="/demon-girl-light-novel"
                 className="block px-4 py-2 hover:bg-gray-100"
               >
-                Demon Girl Light Novel
+                デーモンガールライトノベル
               </Link>
             </div>
           )}
@@ -389,12 +389,12 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("manga")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            MANGA
+            漫画
           </button>
           {openDropdown === "manga" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link to="/kishore" className="block px-4 py-2 hover:bg-gray-100">
-                Kishore
+                キショール
               </Link>
             </div>
           )}
@@ -406,12 +406,12 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("anime")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            ANIME
+            アニメ
           </button>
           {openDropdown === "anime" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link to="/donate" className="block px-4 py-2 hover:bg-gray-100">
-                Donate
+                寄付
               </Link>
             </div>
           )}
@@ -422,12 +422,12 @@ export default function Navbar({ isWhite }) {
             onClick={() => toggleDropdown("join-us")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            JOIN US
+            参加する
           </button>
           {openDropdown === "join-us" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100">
-                JOIN US
+                参加する
               </Link>
             </div>
           )}
@@ -442,7 +442,7 @@ export default function Navbar({ isWhite }) {
           <CartPanel isWhite={isWhite} />
         </div>
       </div>
-      <Link to="/" className="flex items-center gap-2  md:!block">
+      <Link to="/" className="flex items-center gap-2 md:!block">
         <img
           className="h-[100px] w-[120px] md:h-[130px] md:w-[200px]"
           src={logo || "/placeholder.svg"}
