@@ -126,9 +126,7 @@ const AppContent = () => {
           <Route
             path="/demon-girl-light-novel"
             element={
-              <Layout>
                 <NovelReader />
-              </Layout>
             }
           />
           <Route path="/success" element={<Success />} />

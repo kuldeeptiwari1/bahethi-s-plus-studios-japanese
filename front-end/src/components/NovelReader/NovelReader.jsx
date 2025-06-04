@@ -1,20 +1,44 @@
 "use client"
 
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Menu, X } from 'lucide-react'
 import { novelData } from "./NovelData.js"
+import KishoreNav from "../Kishore/KishoreNav.jsx"
 
 export default function NovelReader() {
   const [activeChapter, setActiveChapter] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [chapterPage, setChapterPage] = useState(0)
+  const [pages, setPages] = useState([])
+
   const CHAPTERS_PER_PAGE = 6
+  const WORDS_PER_PAGE = 200 // Approximate words per page
   const totalChapters = novelData.chapters.length
   const totalPages = Math.ceil(totalChapters / CHAPTERS_PER_PAGE)
 
+  // Split chapter content into pages
+  useEffect(() => {
+    const content = novelData.chapters[activeChapter].content
+    const words = content.split(" ")
+    const pageCount = Math.ceil(words.length / WORDS_PER_PAGE)
+    const newPages = []
+
+    for (let i = 0; i < pageCount; i++) {
+      const startIdx = i * WORDS_PER_PAGE
+      const endIdx = Math.min(startIdx + WORDS_PER_PAGE, words.length)
+      const pageContent = words.slice(startIdx, endIdx).join(" ")
+      newPages.push(pageContent)
+    }
+
+    setPages(newPages)
+  }, [activeChapter])
+
   const handleChapterSelect = (index) => {
     setActiveChapter(index)
-    // setIsMenuOpen(false)
+        window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   // Calculate which chapters to show on the current page
@@ -23,152 +47,139 @@ export default function NovelReader() {
   const visibleChapters = novelData.chapters.slice(startIdx, endIdx)
 
   return (
-    <div className="flex flex-col items-end md:me-32 my-14 justify-center relative">
-      <div className="flex w-full max-w-5xl">
-        {/* Menu Toggle Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="fixed top-4 sm:top-[25%] left-4 z-50 bg-purple-800 text-white p-2 rounded-full shadow-lg"
-          aria-label="Toggle chapter menu"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+    <>
+    <KishoreNav isWhite={true}/>
+    <div className="min-h-screen bg-black flex items-start justify-center p-4">
+      {/* Menu Toggle Button */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="fixed top-42 left-3 lg:left-6 z-30 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-colors"
+        aria-label="Toggle chapter menu"
+      >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
-        {/* Sidebar Navigation (No overlay, no logo) */}
-        {isMenuOpen && (
-          <nav
-            className="fixed md:top-[24%] md:left-10 md:h-[430px] rounded-3xl border-4 border-purple-800 bg-white shadow-lg z-40
-                        w-[280px] top-0 left-0 h-full flex flex-col items-center justify-start pt-8"
-          >
-            {/* NEXT CHAPTER Button */}
-            {/* <button
-              onClick={() => {
-                if (activeChapter < totalChapters - 1) handleChapterSelect(activeChapter + 1)
-              }}
-              disabled={activeChapter >= totalChapters - 1}
-              className="text-xl font-bold text-purple-900 mb-6 hover:underline disabled:text-gray-400"
+      {/* Sidebar Navigation */}
+      {isMenuOpen && (
+        <nav className="fixed top-42 left-16 lg:left-20 h-[70vh] w-80 rounded-2xl border-4 border-purple-800 bg-white shadow-2xl z-40 flex flex-col">
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-xl font-bold text-purple-900 text-center">{novelData.title}</h2>
+            <p className="text-sm text-gray-600 text-center mt-1">by {novelData.author}</p>
+          </div>
+
+          {/* Chapter Pagination Controls */}
+          <div className="flex justify-between items-center px-6 py-3 border-b border-gray-200">
+            <button
+              onClick={() => setChapterPage((p) => Math.max(0, p - 1))}
+              disabled={chapterPage === 0}
+              className="text-purple-700 px-3 py-1 rounded disabled:text-gray-300 hover:bg-purple-50"
             >
-              NEXT CHAPTER
-            </button> */}
+              Prev
+            </button>
+            <span className="text-sm text-gray-500 font-medium">
+              {chapterPage + 1} / {totalPages}
+            </span>
+            <button
+              onClick={() => setChapterPage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={chapterPage === totalPages - 1}
+              className="text-purple-700 px-3 py-1 rounded disabled:text-gray-300 hover:bg-purple-50"
+            >
+              Next
+            </button>
+          </div>
 
-            {/* Chapter Pagination Controls */}
-            <div className="flex justify-between w-full px-4 mb-2">
-              <button
-                onClick={() => setChapterPage((p) => Math.max(0, p - 1))}
-                disabled={chapterPage === 0}
-                className="text-purple-700 px-2 py-1 rounded disabled:text-gray-300"
-              >
-                Prev
-              </button>
-              <span className="text-sm text-gray-500">
-                {chapterPage + 1} / {totalPages}
-              </span>
-              <button
-                onClick={() => setChapterPage((p) => Math.min(totalPages - 1, p + 1))}
-                disabled={chapterPage === totalPages - 1}
-                className="text-purple-700 px-2 py-1 rounded disabled:text-gray-300"
-              >
-                Next
-              </button>
-            </div>
-
-            {/* Chapter Buttons (Paginated) */}
-            <div className="space-y-4 w-full px-4">
+          {/* Chapter List */}
+          <div className="flex-1 overflow-y-auto p-4">
+            <div className="space-y-2">
               {visibleChapters.map((chapter, idx) => {
                 const chapterIndex = startIdx + idx
                 return (
                   <button
                     key={chapterIndex}
-                    onClick={() => handleChapterSelect(chapterIndex)}
-                    className={`block w-full text-center px-4 py-2 text-purple-900 rounded-lg transition-all duration-200
-                      ${activeChapter === chapterIndex
-                        ? "bg-purple-100 font-semibold"
-                        : "hover:bg-purple-50"}`}
+                    onClick={() => {
+                      handleChapterSelect(chapterIndex)
+                      setIsMenuOpen(false)
+                    }}
+                    className={`block w-full text-left px-4 py-3 text-sm rounded-lg transition-all duration-200 ${
+                      activeChapter === chapterIndex
+                        ? "bg-purple-100 text-purple-900 font-semibold border-2 border-purple-300"
+                        : "text-gray-700 hover:bg-purple-50 border-2 border-transparent"
+                    }`}
                   >
                     {chapter.title}
                   </button>
                 )
               })}
             </div>
+          </div>
+        </nav>
+      )}
 
-            {/* LAST CHAPTER Button */}
-            {/* <button
-              onClick={() => handleChapterSelect(totalChapters - 1)}
-              disabled={activeChapter === totalChapters - 1}
-              className="text-xl font-bold text-purple-900 mt-6 hover:underline disabled:text-gray-400"
-            >
-              LAST CHAPTER
-            </button> */}
-          </nav>
-        )}
-
-        {/* Book Content (unchanged) */}
-        <div className="flex-1 relative">
-          <div className="bg-white shadow-2xl mx-auto">
-            <div className="flex flex-col md:flex-row">
-              {/* Left Page */}
-              <div className="w-full md:w-1/2 border-r border-gray-300 p-4 bg-white">
-                <div
-                  className="h-full bg-white"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
-                  }}
-                >
-                  <div className="p-6">
-                    <h2 className="text-2xl font-bold mb-4 uppercase text-center">
-                      {novelData.chapters[activeChapter].title}
-                    </h2>
-                    <div className="prose max-w-none">
-                      {novelData.chapters[activeChapter].content
-                        .split("\n\n")
-                        .slice(0, Math.ceil(novelData.chapters[activeChapter].content.split("\n\n").length / 2))
-                        .map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 text-sm">
-                            {paragraph}
-                          </p>
-                        ))}
-                    </div>
-                  </div>
+      {/* Scrollable Pages Container */}
+      <div className="relative max-w-md w-full pt-8">
+        <div className="space-y-8">
+          {pages.map((pageContent, pageIndex) => (
+            <div key={pageIndex} className="bg-white rounded-lg shadow-2xl overflow-hidden" style={{ aspectRatio: "3/4" }}>
+              {/* Notebook Header */}
+              <div className="bg-red-500 h-8 flex items-center justify-center">
+                <div className="flex space-x-2">
+                  {Array.from({ length: 20 }).map((_, i) => (
+                    <div key={i} className="w-1 h-4 bg-white rounded-full opacity-80"></div>
+                  ))}
                 </div>
               </div>
 
-              {/* Spiral Binding */}
-              <div className="hidden md:flex flex-col items-center justify-between py-8 bg-gray-200 w-6">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="w-5 h-5 rounded-full bg-gray-400 border-2 border-gray-300"></div>
-                ))}
-              </div>
-
-              {/* Right Page */}
-              <div className="w-full md:w-1/2 border-l border-gray-300 p-4 bg-white">
+              {/* Page Content */}
+              <div className="h-full bg-white relative">
+                {/* Notebook Lines */}
                 <div
-                  className="h-full bg-white"
+                  className="absolute inset-0 opacity-20"
                   style={{
-                    backgroundImage:
-                      "linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
+                    backgroundImage: "repeating-linear-gradient(transparent, transparent 23px, #e5e5e5 23px, #e5e5e5 24px)",
+                    backgroundSize: "100% 24px",
                   }}
-                >
-                  <div className="p-6">
-                    <div className="prose max-w-none">
-                      {novelData.chapters[activeChapter].content
-                        .split("\n\n")
-                        .slice(Math.ceil(novelData.chapters[activeChapter].content.split("\n\n").length / 2))
-                        .map((paragraph, idx) => (
-                          <p key={idx} className="mb-4 text-sm">
-                            {paragraph}
-                          </p>
-                        ))}
+                />
+
+                {/* Red Margin Line */}
+                <div className="absolute left-12 top-0 bottom-0 w-px bg-red-300 opacity-60"></div>
+
+                {/* Page Content */}
+                <div className="relative h-full p-6 pl-16">
+                  {pageIndex === 0 && (
+                    <div className="mb-6">
+                      <h1 className="text-lg font-bold text-center text-gray-800 mb-2">
+                        {novelData.chapters[activeChapter].title}
+                      </h1>
                     </div>
+                  )}
+
+                  <div className="text-center text-xs text-gray-500 mb-4">
+                    Page {pageIndex + 1} of {pages.length}
+                  </div>
+
+                  <div className="prose prose-sm max-w-none">
+                    {pageContent.split("\n\n").map((paragraph, idx) => (
+                      <p key={idx} className="mb-4 text-gray-800 leading-relaxed text-sm">
+                        {paragraph}
+                      </p>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Chapter Indicator */}
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2">
+          <div className="bg-black bg-opacity-20 backdrop-blur-sm rounded-full px-4 py-2">
+            <span className="text-white text-sm font-medium">
+              Chapter {activeChapter + 1} • {pages.length} {pages.length === 1 ? 'Page' : 'Pages'}
+            </span>
           </div>
         </div>
       </div>
     </div>
+    </>
   )
 }

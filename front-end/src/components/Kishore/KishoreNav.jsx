@@ -33,7 +33,7 @@ export default function KishoreNav({ isWhite }) {
   }, [isMobileMenuOpen]);
 
   return (
-    <nav className={`flex flex-col md:flex-row items-center md:justify-center md:h-[150px] md:px-6 md:py-12 relative z-10 bg-black text-white`}>
+     <nav className={`flex flex-col md:flex-row items-center md:justify-center md:h-[150px] md:px-6 md:py-12 relative z-50 bg-black text-white`}>
       {/* Mobile Hamburger Button */}
       <button
         className={`md:hidden absolute left-4 top-4 z-20 ${isWhite ? 'text-white' : 'text-black'}`}
@@ -47,51 +47,51 @@ export default function KishoreNav({ isWhite }) {
       {isMobileMenuOpen && (
         <div
           ref={menuRef} // Attach the ref to the mobile menu
-          className="mobile-menu absolute left-0 top-0 h-[570px] w-64 bg-white shadow-lg z-30 p-4"
+           className="mobile-menu absolute left-0 top-0 h-[570px] w-64 bg-white !text-black shadow-lg z-50 p-4"
         >
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 p-2 rounded-md hover:bg-gray-200"
+            className="absolute top-4 right-4 p-2 rounded-md bg-red-600 hover:bg-gray-600"
             onClick={toggleMobileMenu}
             aria-label="Close Mobile Menu"
           >
             <X size={24} />
           </button>
 
-          {/* Navigation Links */}
-          <div className="flex flex-col gap-4 mt-12">
-            <Link to="/our-vision" className="block py-2 hover:bg-gray-100 text-black">
-              Our Vision
+         {/* Navigation Links */}
+          <div className="flex flex-col gap-2 mt-12">
+            <Link to="/our-vision" className="block py-2 hover:bg-gray-100">
+              私たちのビジョン
             </Link>
-            <Link to="/our-artists" className="block py-2 hover:bg-gray-100 text-black">
-              Our Artists
+            <Link to="/our-artists" className="block py-2 hover:bg-gray-100">
+              アーティスト紹介
             </Link>
-            <Link to="/join-us" className="block py-2 hover:bg-gray-100 text-black">
-              Join Us
+            <Link to="/join-us" className="block py-2 hover:bg-gray-100">
+              チームに参加しよう
             </Link>
-            <Link to="/comiket-preorder" className="block py-2 hover:bg-gray-100 text-black">
-              Comiket Pre-Order
+            <Link to="/comiket-preorder" className="block py-2 hover:bg-gray-100">
+              コミケ予約
             </Link>
-            <Link to="/photos-of-no-one" className="block py-2 hover:bg-gray-100 text-black">
-              Photos of No One Pre-Order
+            <Link to="/photos-of-no-one" className="block py-2 hover:bg-gray-100">
+              誰の写真
             </Link>
-            <Link to="/updates" className="block py-2 hover:bg-gray-100 text-black">
-              Blog
+            <Link to="/updates" className="block py-2 hover:bg-gray-100">
+              ブログ
             </Link>
-            <Link to="/demon-girl-light-novel" className="block py-2 hover:bg-gray-100 text-black">
-              Demon Girl Light Novel
+            <Link to="/demon-girl-light-novel" className="block py-2 hover:bg-gray-100">
+              デーモンガールライトノベル
             </Link>
-            <Link to="/kishore" className="block py-2 hover:bg-gray-100 text-black">
-              Kishore
+            <Link to="/kishore" className="block py-2 hover:bg-gray-100">
+              キショール
             </Link>
-            <Link to="/donate" className="block py-2 hover:bg-gray-100 text-black">
-              Donate
+            <Link to="/donate" className="block py-2 hover:bg-gray-100">
+              寄付
             </Link>
           </div>
         </div>
       )}
 
-      {/* Desktop Navigation */}
+          {/* Desktop Navigation */}
       <div className={`hidden md:!flex flex-row justify-start items-center gap-2 md:gap-8 w-full mt-4 md:mt-0 ml-4`}>
         {/* About Us Dropdown */}
         <div className="relative dropdown">
@@ -99,24 +99,24 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("about")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            ABOUT US
+            私たちについて
           </button>
           {openDropdown === "about" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link
                 to="/our-vision"
-                className="block px-4 py-2 hover:bg-gray-100 text-black"
+                className="block px-4 py-2 hover:bg-gray-100"
               >
-                Our Vision
+                私たちのビジョン
               </Link>
               <Link
                 to="/our-artists"
-                className="block px-4 py-2 hover:bg-gray-100 text-black"
+                className="block px-4 py-2 hover:bg-gray-100"
               >
-                Our Artists
+                アーティスト紹介
               </Link>
-              <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100 text-black">
-                Join Us
+              <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100">
+                チームに参加しよう
               </Link>
             </div>
           )}
@@ -128,21 +128,21 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("merch")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            MERCH
+            グッズ
           </button>
           {openDropdown === "merch" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link
                 to="/comiket-preorder"
-                className="block px-4 py-2 hover:bg-gray-100 text-black"
+                className="block px-4 py-2 hover:bg-gray-100"
               >
-                Comiket Pre-Order
+                コミケ予約
               </Link>
               <Link
                 to="/photos-of-no-one"
-                className="block px-4 py-2 hover:bg-gray-100 text-black"
+                className="block px-4 py-2 hover:bg-gray-100"
               >
-                Photos of No One Pre-Order
+                誰の写真
               </Link>
             </div>
           )}
@@ -154,12 +154,12 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("updates")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            UPDATES
+            最新情報
           </button>
           {openDropdown === "updates" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
-              <Link to="/updates" className="block px-4 py-2 hover:bg-gray-100 text-black">
-                Blog
+              <Link to="/updates" className="block px-4 py-2 hover:bg-gray-100">
+                ブログ
               </Link>
             </div>
           )}
@@ -171,15 +171,15 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("light-novels")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            LIGHT NOVEL
+            ライトノベル
           </button>
           {openDropdown === "light-novels" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
               <Link
                 to="/demon-girl-light-novel"
-                className="block px-4 py-2 hover:bg-gray-100 text-black"
+                className="block px-4 py-2 hover:bg-gray-100"
               >
-                Demon Girl Light Novel
+                デーモンガールライトノベル
               </Link>
             </div>
           )}
@@ -191,12 +191,12 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("manga")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            MANGA
+            漫画
           </button>
           {openDropdown === "manga" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
-              <Link to="/kishore" className="block px-4 py-2 hover:bg-gray-100 text-black">
-                Kishore
+              <Link to="/kishore" className="block px-4 py-2 hover:bg-gray-100">
+                キショール
               </Link>
             </div>
           )}
@@ -208,12 +208,12 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("anime")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            ANIME
+            アニメ
           </button>
           {openDropdown === "anime" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
-              <Link to="/donate" className="block px-4 py-2 hover:bg-gray-100 text-black">
-                Donate
+              <Link to="/donate" className="block px-4 py-2 hover:bg-gray-100">
+                寄付
               </Link>
             </div>
           )}
@@ -224,12 +224,12 @@ export default function KishoreNav({ isWhite }) {
             onClick={() => toggleDropdown("join-us")}
             className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}
           >
-            JOIN US
+            参加する
           </button>
           {openDropdown === "join-us" && (
             <div className="absolute left-0 z-10 mt-2 bg-white shadow-lg border rounded-md w-48">
-              <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100 text-black">
-                JOIN US
+              <Link to="/join-us" className="block px-4 py-2 hover:bg-gray-100">
+                参加する
               </Link>
             </div>
           )}
