@@ -116,14 +116,14 @@ export default function NovelReader() {
       )}
 
       {/* Scrollable Pages Container */}
-      <div className="relative max-w-md w-full pt-8">
+      <div className="relative max-w-md w-full ">
         <div className="space-y-8">
           {pages.map((pageContent, pageIndex) => (
-            <div key={pageIndex} className="bg-white rounded-lg shadow-2xl overflow-hidden" style={{ aspectRatio: "3/4" }}>
+            <div key={pageIndex} className="bg-white rounded-lg shadow-2xl overflow-hidden" >
               {/* Notebook Header */}
-              <div className="bg-red-500 h-8 flex items-center justify-center">
+              <div className="h-8 flex items-center justify-center">
                 <div className="flex space-x-2">
-                  {Array.from({ length: 20 }).map((_, i) => (
+                  {Array.from({ length: 24 }).map((_, i) => (
                     <div key={i} className="w-1 h-4 bg-white rounded-full opacity-80"></div>
                   ))}
                 </div>
@@ -141,25 +141,25 @@ export default function NovelReader() {
                 />
 
                 {/* Red Margin Line */}
-                <div className="absolute left-12 top-0 bottom-0 w-px bg-red-300 opacity-60"></div>
+                <div className="absolute left-6 md:left-12 top-0 bottom-0 w-px bg-black opacity-60"></div>
 
                 {/* Page Content */}
-                <div className="relative h-full p-6 pl-16">
+                <div className="relative h-full p-6 pl-12 md:pl-16">
                   {pageIndex === 0 && (
                     <div className="mb-6">
-                      <h1 className="text-lg font-bold text-center text-gray-800 mb-2">
+                      <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">
                         {novelData.chapters[activeChapter].title}
                       </h1>
                     </div>
                   )}
 
-                  <div className="text-center text-xs text-gray-500 mb-4">
+                  <div className="text-center text-sm text-gray-500 mb-4">
                     Page {pageIndex + 1} of {pages.length}
                   </div>
 
-                  <div className="prose prose-sm max-w-none">
+                  <div className="prose prose-md max-w-none">
                     {pageContent.split("\n\n").map((paragraph, idx) => (
-                      <p key={idx} className="mb-4 text-gray-800 leading-relaxed text-sm">
+                      <p key={idx} className="mb-4 text-gray-800 leading-relaxed text-lg md:text-xl">
                         {paragraph}
                       </p>
                     ))}
