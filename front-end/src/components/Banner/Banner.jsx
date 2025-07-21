@@ -102,12 +102,12 @@ export default function Banner() {
       <div className="relative w-full md:h-screen overflow-hidden">
 
         {/* Carousel */}
-        <div className="embla overflow-hidden md:h-screen" ref={emblaRef}>
+        <div className="embla overflow-hidden md:h-screen h-[300px]" ref={emblaRef}>
           <div className="embla__container flex h-[300px] md:h-full">
             {SLIDES.map((slide) => (
               <div
                 key={slide.id}
-                className="embla__slide relative md:min-w-full md:h-full min-w-full h-full flex items-center justify-center"
+                 className="embla__slide relative min-w-full h-full flex items-center justify-center"
                 style={{
                   backgroundImage: `url(${slide.backgroundImage})`,
                   backgroundSize: "cover",
