@@ -22,6 +22,7 @@ import HomePage from "./components/HomePage/HomePage.jsx";
 import TShirts from "./components/T-Shirts/TShirts.jsx";
 import ProductDetail from "./components/T-Shirts/ProductDetails.jsx";
 import NovelReader from "./components/NovelReader/NovelReader.jsx";
+import SinglePage from "./components/SinglePage/SinglePage.jsx";
 // import { Toaster } from "react-hot-toast"
 
 const AppContent = () => {
@@ -144,6 +145,15 @@ const AppContent = () => {
             element={
               <Layout>
                 <JoinUs />
+              </Layout>
+            }
+          />
+
+          <Route
+            path="/single-page"
+            element={
+              <Layout>
+                <SinglePage/>
               </Layout>
             }
           />
