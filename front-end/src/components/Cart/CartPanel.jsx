@@ -16,7 +16,7 @@ export default function CartPanel({ isWhite }) {
   const totalPrice = cartItems.reduce((total, item) => {
     // Ensure we're working with numbers
     const price =
-      typeof item.actual_Price === "string" ? Number.parseFloat(item.actual_Price.replace("$", "")) : item.actual_Price
+      typeof item.actual_Price === "string" ? Number.parseFloat(item.actual_Price.replace("¥", "")) : item.actual_Price
 
     return total + item.quantity * price
   }, 0)
@@ -168,7 +168,7 @@ export default function CartPanel({ isWhite }) {
               <>
                 <div className="mb-4">
                   <span className="tracking-wider">Total:</span>
-                  <span className="font-bold ms-2 text-green-600">${totalPrice.toFixed(2)}</span>
+                  <span className="font-bold ms-2 text-green-600">¥{totalPrice.toFixed(2)}</span>
                 </div>
                 <Link
                   to="/cart"

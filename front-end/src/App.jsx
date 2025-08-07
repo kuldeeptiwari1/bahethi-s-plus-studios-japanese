@@ -23,6 +23,7 @@ import TShirts from "./components/T-Shirts/TShirts.jsx";
 import ProductDetail from "./components/T-Shirts/ProductDetails.jsx";
 import NovelReader from "./components/NovelReader/NovelReader.jsx";
 import SinglePage from "./components/SinglePage/SinglePage.jsx";
+import ScrollableImage from "./components/scrollable_Image/ScrollableImage.jsx";
 // import { Toaster } from "react-hot-toast"
 
 const AppContent = () => {
@@ -154,6 +155,14 @@ const AppContent = () => {
             element={
               <Layout>
                 <SinglePage/>
+              </Layout>
+            }
+          />
+          <Route
+            path="/scrollable-image"
+            element={
+              <Layout>
+                <ScrollableImage/>
               </Layout>
             }
           />

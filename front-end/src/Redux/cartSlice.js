@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit';
 import { toast } from "react-hot-toast"
 
 // Load cart from Local Storage
@@ -17,20 +17,21 @@ const initialState = {
 }
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
+      // The payload now contains 'price' (number) instead of 'actual_Price' (string)
       const existingItem = state.cartItems.find(
         (item) => item.url === action.payload.url && item.size === action.payload.size,
       )
-
       if (existingItem) {
         // Add the new quantity to the existing quantity
         existingItem.quantity += action.payload.quantity
         toast.success(`${action.payload.itemName} quantity updated!`)
       } else {
-        // Add new item with its quantity
+        // Store the price as a number.
+        // The payload should already have 'price' as a number from ScrollableImage.
         state.cartItems.push({ ...action.payload })
         toast.success(`${action.payload.itemName} added to cart!`)
       }
@@ -45,7 +46,6 @@ const cartSlice = createSlice({
     },
     decreaseCart: (state, action) => {
       const item = state.cartItems.find((item) => item.url === action.payload.url && item.size === action.payload.size)
-
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1
@@ -63,7 +63,7 @@ const cartSlice = createSlice({
       toast.success("Payment successful! Redirecting to home page...")
     },
   },
-})
+});
 
-export const { addToCart, removeFromCart, decreaseCart, clearCart } = cartSlice.actions
-export default cartSlice.reducer
+export const { addToCart, removeFromCart, decreaseCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;

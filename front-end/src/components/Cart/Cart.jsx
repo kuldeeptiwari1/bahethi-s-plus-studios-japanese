@@ -57,7 +57,7 @@ function Cart() {
     (total, item) => {
       // Ensure we're working with numbers
       const price = typeof item.actual_Price === 'string' 
-        ? parseFloat(item.actual_Price.replace('$', '')) 
+        ? parseFloat(item.actual_Price.replace('¥', '')) 
         : item.actual_Price
       
       return total + (item.quantity * price)
@@ -89,7 +89,7 @@ function Cart() {
                     <p className="font-medium text-sm md:text-base">{item.itemName}</p>
                     {item.size && <p className="text-gray-500 text-xs">Size: {item.size}</p>}
                     <p className="text-red-600 font-semibold mb-4 sm:mb-0">
-                      ${(item.quantity * parseFloat(item.actual_Price.replace("$", ""))).toFixed(2)}
+                      ${(item.quantity * parseFloat(item.actual_Price.replace("¥", ""))).toFixed(2)}
                     </p>
                   </div>
                 </div>
