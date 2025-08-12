@@ -53,17 +53,17 @@ const OrderForm = ({ orderNumber, onFormSubmit }) => {
 
       console.log("Submitting order data:", submissionData);
       
-      // TODO: Replace with your actual API endpoint
-      // const response = await fetch("http://localhost:5000/submit-order", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(submissionData),
-      // });
+      const response = await fetch("http://localhost:5000/submit-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      });
 
-      // Simulate API call for now
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      if (!response.ok) {
+        throw new Error("Failed to submit order");
+      }
 
       toast.success("Order details submitted successfully!");
       setIsSubmitted(true);

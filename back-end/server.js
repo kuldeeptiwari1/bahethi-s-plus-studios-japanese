@@ -69,6 +69,7 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import Stripe from "stripe";
+import { sendOrderConfirmationEmail } from "./services/emailService.js";
 
 dotenv.config(); // Load environment variables
 
@@ -87,6 +88,28 @@ app.get("/", (req, res) => {
 });
   
 app.use('/assets', express.static('public/assets'));
+
+// Handle order form submission
+app.post("/submit-order", async (req, res) => {
+    try {
+        const orderDetails = req.body;
+        console.log("Received order details:", orderDetails);
+
+        // Send confirmation email
+        await sendOrderConfirmationEmail(orderDetails);
+
+        res.status(200).json({
+            success: true,
+            message: "Order details received and confirmation email sent"
+        });
+    } catch (error) {
+        console.error("Error processing order:", error);
+        res.status(500).json({
+            success: false,
+            error: "Failed to process order"
+        });
+    }
+});
 
 app.post("/create-checkout-session", async (req, res) => {
     try {
