@@ -232,7 +232,7 @@ function Cart() {
 
     try {
       // First, store the order in database
-      const storeOrderResponse = await fetch("http://localhost:5000/store-order", {
+      const storeOrderResponse = await fetch("http://localhost:5000/api/store-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
