@@ -1,3 +1,4 @@
+
 import { useSelector, useDispatch } from "react-redux"
 import { removeFromCart, addToCart, decreaseCart, clearCart } from "../../Redux/cartSlice"
 import { Link } from "react-router-dom"
@@ -14,14 +15,33 @@ function Cart() {
   const dispatch = useDispatch()
 
   const handlePayment = async () => {
-    console.log("Sending cartItems to backend:", cartItems)
+    // Convert actual_Price to string format for backend compatibility
+    const formattedCartItems = cartItems.map(item => {
+      // Ensure price is a valid number before formatting
+      let price = item.actual_Price;
+      if (typeof price === 'string') {
+        price = parseFloat(price.replace(/[¥$,]/g, ''));
+      }
+      
+      // If price is still not a valid number, default to 0
+      if (isNaN(price) || price < 0) {
+        price = 0;
+      }
+
+      return {
+        ...item,
+        actual_Price: `¥${price}`
+      };
+    });
+
+    console.log("Sending cartItems to backend:", formattedCartItems)
     const stripe = await stripePromise
 
     try {
       const response = await fetch("http://localhost:5000/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cartItems }),
+        body: JSON.stringify({ cartItems: formattedCartItems }),
       })
 
       if (!response.ok) {
@@ -33,13 +53,22 @@ function Cart() {
         throw new Error("Invalid session response")
       }
 
+      // Generate random 6-digit order number before redirect
+      const orderNumber = Math.floor(100000 + Math.random() * 900000);
+      console.log("Order Number Generated:", orderNumber);
+      
+      // Store order number in localStorage before redirect
+      localStorage.setItem('orderNumber', orderNumber.toString());
+
       const result = await stripe.redirectToCheckout({ sessionId: session.id })
 
       if (!result.error) {
-        // ✅ Clear the cart after a successful payment
+        // ✅ The payment was successful, user will be redirected to success page
         dispatch(clearCart())
       } else {
         console.error(result.error)
+        // Clean up if there was an error
+        localStorage.removeItem('orderNumber');
       }
     } catch (error) {
       console.error("Payment error:", error)
@@ -56,11 +85,12 @@ function Cart() {
   const totalPrice = cartItems.reduce(
     (total, item) => {
       // Ensure we're working with numbers
-      const price = typeof item.actual_Price === 'string' 
-        ? parseFloat(item.actual_Price.replace('¥', '')) 
-        : item.actual_Price
-      
-      return total + (item.quantity * price)
+      let price = item.actual_Price;
+      if (typeof price === 'string') {
+        // Remove currency symbols and commas, then parse
+        price = parseFloat(price.replace(/[¥$,]/g, '')) || 0;
+      }
+      return total + (item.quantity * price);
     },
     0
   )
@@ -89,7 +119,7 @@ function Cart() {
                     <p className="font-medium text-sm md:text-base">{item.itemName}</p>
                     {item.size && <p className="text-gray-500 text-xs">Size: {item.size}</p>}
                     <p className="text-red-600 font-semibold mb-4 sm:mb-0">
-                      ${(item.quantity * parseFloat(item.actual_Price.replace("¥", ""))).toFixed(2)}
+                      ¥{(item.quantity * (parseFloat(item.actual_Price?.replace(/[¥$,]/g, '')) || 0)).toFixed(2)}
                     </p>
                   </div>
                 </div>
@@ -129,7 +159,7 @@ function Cart() {
             {/* Total Price */}
             <div className="text-lg font-semibold mt-6 mb-12">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <span className="text-green-600 text-xl">Total: ${totalPrice.toFixed(2)}</span>
+                <span className="text-green-600 text-xl">Total: ¥{totalPrice.toFixed(2)}</span>
                 <button
                   className="w-full sm:w-auto bg-green-500 hover:bg-green-600 p-2 px-4 rounded-md text-white font-medium"
                   onClick={handlePayment}
