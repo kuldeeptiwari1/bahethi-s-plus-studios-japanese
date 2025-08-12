@@ -24,6 +24,7 @@ import ProductDetail from "./components/T-Shirts/ProductDetails.jsx";
 import NovelReader from "./components/NovelReader/NovelReader.jsx";
 import SinglePage from "./components/SinglePage/SinglePage.jsx";
 import ScrollableImage from "./components/scrollable_Image/ScrollableImage.jsx";
+import OrderList from "./components/Admin/OrderList.jsx";
 // import { Toaster } from "react-hot-toast"
 
 const AppContent = () => {
@@ -163,6 +164,15 @@ const AppContent = () => {
             element={
               <Layout>
                 <ScrollableImage/>
+              </Layout>
+            }
+          />
+
+           <Route
+            path="/verify-orders"
+            element={
+              <Layout>
+                <OrderList/>
               </Layout>
             }
           />

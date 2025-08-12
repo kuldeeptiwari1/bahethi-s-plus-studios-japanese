@@ -1,4 +1,192 @@
 
+// import { useSelector, useDispatch } from "react-redux"
+// import { removeFromCart, addToCart, decreaseCart, clearCart } from "../../Redux/cartSlice"
+// import { Link } from "react-router-dom"
+// import { ArrowLeft } from 'lucide-react'
+// import { FaShoppingCart, FaTrash } from "react-icons/fa"
+// import { loadStripe } from "@stripe/stripe-js"
+// import { Toaster } from "react-hot-toast"
+// import toast from "react-hot-toast"
+
+// const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
+
+// function Cart() {
+//   const cartItems = useSelector((state) => state.cart.cartItems)
+//   const dispatch = useDispatch()
+
+//   const handlePayment = async () => {
+//     // Convert actual_Price to string format for backend compatibility
+//     const formattedCartItems = cartItems.map(item => {
+//       // Ensure price is a valid number before formatting
+//       let price = item.actual_Price;
+//       if (typeof price === 'string') {
+//         price = parseFloat(price.replace(/[¥$,]/g, ''));
+//       }
+      
+//       // If price is still not a valid number, default to 0
+//       if (isNaN(price) || price < 0) {
+//         price = 0;
+//       }
+
+//       return {
+//         ...item,
+//         actual_Price: `¥${price}`
+//       };
+//     });
+
+//     console.log("Sending cartItems to backend:", formattedCartItems)
+//     const stripe = await stripePromise
+
+//     try {
+//       const response = await fetch("http://localhost:5000/create-checkout-session", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ cartItems: formattedCartItems }),
+//       })
+
+//       if (!response.ok) {
+//         throw new Error("Failed to create checkout session")
+//       }
+
+//       const session = await response.json()
+//       if (!session.id) {
+//         throw new Error("Invalid session response")
+//       }
+
+//       // Generate random 6-digit order number before redirect
+//       const orderNumber = Math.floor(100000 + Math.random() * 900000);
+//       console.log("Order Number Generated:", orderNumber);
+      
+//       // Store order number in localStorage before redirect
+//       localStorage.setItem('orderNumber', orderNumber.toString());
+
+//       const result = await stripe.redirectToCheckout({ sessionId: session.id })
+
+//       if (!result.error) {
+//         // ✅ The payment was successful, user will be redirected to success page
+//         dispatch(clearCart())
+//       } else {
+//         console.error(result.error)
+//         // Clean up if there was an error
+//         localStorage.removeItem('orderNumber');
+//       }
+//     } catch (error) {
+//       console.error("Payment error:", error)
+//       toast.error("Something went wrong. Please try again later.")
+//     }
+//   }
+
+//   // Function to increase quantity
+//   const handleIncreaseQuantity = (item) => {
+//     dispatch(addToCart({ ...item, quantity: 1 }))
+//   }
+
+//   // Calculate total price
+//   const totalPrice = cartItems.reduce(
+//     (total, item) => {
+//       // Ensure we're working with numbers
+//       let price = item.actual_Price;
+//       if (typeof price === 'string') {
+//         // Remove currency symbols and commas, then parse
+//         price = parseFloat(price.replace(/[¥$,]/g, '')) || 0;
+//       }
+//       return total + (item.quantity * price);
+//     },
+//     0
+//   )
+
+//   return (
+//     <>
+//       <Toaster />
+//       <div className="flex flex-col items-center p-4 md:p-6 min-h-[60vh] relative">
+//         <h2 className="text-2xl md:text-3xl font-semibold mb-4 flex justify-center items-center">
+//           Your Cart{" "}
+//           <span className="ml-1">
+//             {" "}
+//             <FaShoppingCart />
+//           </span>
+//         </h2>
+
+//         {cartItems.length === 0 ? (
+//           <p className="text-gray-600 text-xl md:text-2xl">Your cart is empty !!!</p>
+//         ) : (
+//           <div className="w-full max-w-md">
+//             {cartItems.map((item, index) => (
+//               <div key={index} className="flex flex-col sm:flex-row justify-between items-center border-b pb-4 mb-4">
+//                 <div className="flex items-center mb-2 sm:mb-0">
+//                   <img src={item.url || "/placeholder.svg"} alt={item.itemName} className="h-16 w-16 object-cover mr-3" />
+//                   <div className="flex flex-col">
+//                     <p className="font-medium text-sm md:text-base">{item.itemName}</p>
+//                     {item.size && <p className="text-gray-500 text-xs">Size: {item.size}</p>}
+//                     <p className="text-red-600 font-semibold mb-4 sm:mb-0">
+//                       ¥{(item.quantity * (parseFloat(item.actual_Price?.replace(/[¥$,]/g, '')) || 0)).toFixed(2)}
+//                     </p>
+//                   </div>
+//                 </div>
+
+//                 <div className="flex items-center gap-6">
+//                   {/* Quantity Controls */}
+//                   <div className="flex items-center border border-gray-300">
+//                     <button 
+//                       onClick={() => dispatch(decreaseCart(item))} 
+//                       className="bg-gray-200 px-3 py-1"
+//                       aria-label="Decrease quantity"
+//                     >
+//                       -
+//                     </button>
+//                     <span className="px-3 py-1">{item.quantity}</span>
+//                     <button 
+//                       onClick={() => handleIncreaseQuantity(item)} 
+//                       className="bg-gray-200 px-3 py-1"
+//                       aria-label="Increase quantity"
+//                     >
+//                       +
+//                     </button>
+//                   </div>
+
+//                   <button
+//                     onClick={() => dispatch(removeFromCart(item))}
+//                     className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded flex items-center"
+//                     aria-label="Remove item"
+//                   >
+//                     <FaTrash size={15} className="mr-1" />
+//                     <span className="hidden sm:inline">Remove</span>
+//                   </button>
+//                 </div>
+//               </div>
+//             ))}
+
+//             {/* Total Price */}
+//             <div className="text-lg font-semibold mt-6 mb-12">
+//               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+//                 <span className="text-green-600 text-xl">Total: ¥{totalPrice.toFixed(2)}</span>
+//                 <button
+//                   className="w-full sm:w-auto bg-green-500 hover:bg-green-600 p-2 px-4 rounded-md text-white font-medium"
+//                   onClick={handlePayment}
+//                 >
+//                   Proceed to Check Out
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+//         <Link
+//           to="/comiket-preorder"
+//           className="mt-4 flex text-blue-500 underline tracking-wide text-lg md:text-xl absolute bottom-5"
+//         >
+//           <ArrowLeft className="mr-1 mt-1" size={18} />
+//           Back to Shopping
+//         </Link>
+//       </div>
+//     </>
+//   )
+// }
+
+// export default Cart
+
+
+
 import { useSelector, useDispatch } from "react-redux"
 import { removeFromCart, addToCart, decreaseCart, clearCart } from "../../Redux/cartSlice"
 import { Link } from "react-router-dom"
@@ -17,13 +205,11 @@ function Cart() {
   const handlePayment = async () => {
     // Convert actual_Price to string format for backend compatibility
     const formattedCartItems = cartItems.map(item => {
-      // Ensure price is a valid number before formatting
       let price = item.actual_Price;
       if (typeof price === 'string') {
         price = parseFloat(price.replace(/[¥$,]/g, ''));
       }
       
-      // If price is still not a valid number, default to 0
       if (isNaN(price) || price < 0) {
         price = 0;
       }
@@ -34,45 +220,67 @@ function Cart() {
       };
     });
 
-    console.log("Sending cartItems to backend:", formattedCartItems)
-    const stripe = await stripePromise
+    // Generate random 6-digit order number
+    const orderNumber = Math.floor(100000 + Math.random() * 900000);
+    console.log("Order Number Generated:", orderNumber);
+    
+    // Calculate total amount
+    const totalAmount = formattedCartItems.reduce((total, item) => {
+      const price = parseFloat(item.actual_Price.replace(/[¥$,]/g, '')) || 0;
+      return total + (item.quantity * price);
+    }, 0);
 
     try {
+      // First, store the order in database
+      const storeOrderResponse = await fetch("http://localhost:5000/store-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          orderNumber: orderNumber.toString(),
+          cartItems: formattedCartItems,
+          totalAmount: totalAmount
+        }),
+      });
+
+      if (!storeOrderResponse.ok) {
+        throw new Error("Failed to store order in database");
+      }
+
+      console.log("Order stored in database successfully");
+
+      // Store order number in localStorage before redirect
+      localStorage.setItem('orderNumber', orderNumber.toString());
+
+      // Then create Stripe checkout session
+      const stripe = await stripePromise;
       const response = await fetch("http://localhost:5000/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems: formattedCartItems }),
-      })
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to create checkout session")
+        throw new Error("Failed to create checkout session");
       }
 
-      const session = await response.json()
+      const session = await response.json();
       if (!session.id) {
-        throw new Error("Invalid session response")
+        throw new Error("Invalid session response");
       }
 
-      // Generate random 6-digit order number before redirect
-      const orderNumber = Math.floor(100000 + Math.random() * 900000);
-      console.log("Order Number Generated:", orderNumber);
-      
-      // Store order number in localStorage before redirect
-      localStorage.setItem('orderNumber', orderNumber.toString());
-
-      const result = await stripe.redirectToCheckout({ sessionId: session.id })
+      const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
       if (!result.error) {
-        // ✅ The payment was successful, user will be redirected to success page
-        dispatch(clearCart())
+        dispatch(clearCart());
       } else {
-        console.error(result.error)
-        // Clean up if there was an error
+        console.error(result.error);
         localStorage.removeItem('orderNumber');
       }
     } catch (error) {
-      console.error("Payment error:", error)
-      toast.error("Something went wrong. Please try again later.")
+      console.error("Payment error:", error);
+      toast.error("Something went wrong. Please try again later.");
+      // Remove order number if there was an error
+      localStorage.removeItem('orderNumber');
     }
   }
 
@@ -84,10 +292,8 @@ function Cart() {
   // Calculate total price
   const totalPrice = cartItems.reduce(
     (total, item) => {
-      // Ensure we're working with numbers
       let price = item.actual_Price;
       if (typeof price === 'string') {
-        // Remove currency symbols and commas, then parse
         price = parseFloat(price.replace(/[¥$,]/g, '')) || 0;
       }
       return total + (item.quantity * price);
@@ -125,7 +331,6 @@ function Cart() {
                 </div>
 
                 <div className="flex items-center gap-6">
-                  {/* Quantity Controls */}
                   <div className="flex items-center border border-gray-300">
                     <button 
                       onClick={() => dispatch(decreaseCart(item))} 
@@ -156,7 +361,6 @@ function Cart() {
               </div>
             ))}
 
-            {/* Total Price */}
             <div className="text-lg font-semibold mt-6 mb-12">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <span className="text-green-600 text-xl">Total: ¥{totalPrice.toFixed(2)}</span>
