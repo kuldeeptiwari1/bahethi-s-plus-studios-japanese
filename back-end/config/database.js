@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const connectDatabase = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/splusstudios', {
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/order_list', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });

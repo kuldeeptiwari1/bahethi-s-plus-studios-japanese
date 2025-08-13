@@ -151,14 +151,14 @@ const AppContent = () => {
             }
           />
 
-          <Route
+          {/* <Route
             path="/single-page"
             element={
               <Layout>
                 <SinglePage/>
               </Layout>
             }
-          />
+          /> */}
           <Route
             path="/scrollable-image"
             element={
