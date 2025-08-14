@@ -87,7 +87,14 @@ export default function BannerNav({ isWhite }) {
             <Link to="/donate" className="block py-2 hover:bg-gray-100">
               寄付
             </Link>
+            
           </div>
+        
+          
+            
+              
+          
+      
         </div>
       )}
 
@@ -234,6 +241,12 @@ export default function BannerNav({ isWhite }) {
             </div>
           )}
         </div>
+
+        <Link to="/products" className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}>
+               この「製品
+
+               {/* product */}
+              </Link>
       </div>
 
       {/* Logo */}

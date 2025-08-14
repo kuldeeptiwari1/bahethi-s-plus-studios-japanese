@@ -481,7 +481,7 @@ const OrderList = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/orders');
+      const response = await fetch('/api/orders');
       
       if (!response.ok) {
         throw new Error('Failed to fetch orders');
@@ -507,7 +507,7 @@ const OrderList = () => {
   // Update order status
   const updateOrderStatus = async (orderNumber, newStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${orderNumber}/status`, {
+      const response = await fetch(`/api/orders/${orderNumber}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

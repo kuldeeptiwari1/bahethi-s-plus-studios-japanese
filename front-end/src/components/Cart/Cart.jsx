@@ -232,7 +232,7 @@ function Cart() {
 
     try {
       // First, store the order in database
-      const storeOrderResponse = await fetch("http://localhost:5000/api/store-order", {
+      const storeOrderResponse = await fetch("/api/store-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -253,7 +253,7 @@ function Cart() {
 
       // Then create Stripe checkout session
       const stripe = await stripePromise;
-      const response = await fetch("http://localhost:5000/create-checkout-session", {
+      const response = await fetch("/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems: formattedCartItems }),

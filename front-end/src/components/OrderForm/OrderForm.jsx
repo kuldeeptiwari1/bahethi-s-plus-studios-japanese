@@ -365,7 +365,7 @@ const OrderForm = ({ orderNumber, onFormSubmit }) => {
       console.log("Submitting order data:", submissionData);
       
       // UPDATED ENDPOINT - Changed from /api/submit-order to /api/submit-order
-      const response = await fetch("http://localhost:5000/api/submit-order", {
+      const response = await fetch("/api/submit-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
