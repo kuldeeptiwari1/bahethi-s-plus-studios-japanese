@@ -100,7 +100,7 @@ function ProductCard({ product }) {
         </div>
         <div className="p-4">
           <h3 className="text-sm font-medium line-clamp-2 h-10">{product.name}</h3>
-          <p className="text-lg font-bold mt-2">${product.price.toFixed(2)}</p>
+          <p className="text-lg font-bold mt-2">¥{product.price.toFixed(2)}</p>
         </div>
       </div>
     </Link>

@@ -18,7 +18,7 @@ export default function ScrollableImage() {
       nameJapanese: 'アートプリント',
       price: 1500,
       description: 'High-quality anime art print',
-      url: '../../../public/prod2.png'
+      url: '/prod1.png'
     },
     {
       id: 2,
@@ -26,7 +26,7 @@ export default function ScrollableImage() {
       nameJapanese: '漫画',
       price: 1500,
       description: 'Original manga volume',
-      url: '../../../public/prod2.png'
+      url: '/prod2.png'
     },
     {
       id: 3,
@@ -102,7 +102,7 @@ export default function ScrollableImage() {
   const handleAddToCart = (product) => {
     // Add to cart using Redux
 
-    console.log(product)
+    console.log(product.name)
     dispatch(
       addToCart({
         url: product.url,

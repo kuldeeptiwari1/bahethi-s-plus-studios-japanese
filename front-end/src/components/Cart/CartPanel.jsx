@@ -15,8 +15,9 @@ export default function CartPanel({ isWhite }) {
   // Calculate total price
   const totalPrice = cartItems.reduce((total, item) => {
     // Ensure we're working with numbers
+    console.log("consolee from cartpanel", item)
     const price =
-      typeof item.actual_Price === "string" ? Number.parseFloat(item.actual_Price.replace("¥", "")) : item.actual_Price
+      typeof item.actual_Price === "string" ? Number.parseFloat(item.actual_Price.replace(/[¥$,]/g, '')) : item.actual_Price
 
     return total + item.quantity * price
   }, 0)

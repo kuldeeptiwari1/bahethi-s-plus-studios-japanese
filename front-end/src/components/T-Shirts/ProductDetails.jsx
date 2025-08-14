@@ -161,7 +161,7 @@ export default function ProductDetail() {
         {/* Product Details */}
         <div>
           <h1 className="text-2xl font-bold">{product.name}</h1>
-          <p className="text-3xl font-bold mt-4">${product.price.toFixed(2)}</p>
+          <p className="text-3xl font-bold mt-4">¥{product.price.toFixed(2)}</p>
 
           <div className="mt-8">
             <h2 className="text-lg font-semibold mb-2">SIZE</h2>

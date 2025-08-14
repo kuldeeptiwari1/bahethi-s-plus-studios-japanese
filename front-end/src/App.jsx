@@ -160,7 +160,7 @@ const AppContent = () => {
             }
           /> */}
           <Route
-            path="/scrollable-image"
+            path="/products"
             element={
               <Layout>
                 <ScrollableImage/>

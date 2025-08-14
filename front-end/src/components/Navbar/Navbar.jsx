@@ -434,14 +434,16 @@ export default function Navbar({ isWhite }) {
         </div>
 
 
-         {/* <div className="relative dropdown">
+         <div className="relative dropdown">
           
             
-              <Link to="/single-page" className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}>
-                一ページ
+              <Link to="/products" className={`${isWhite ? 'text-white' : 'text-black'} underline underline-offset-4 md:font-bold text-sm md:text-xl`}>
+               この「製品
+
+               {/* product */}
               </Link>
           
-        </div> */}
+        </div>
       </div>
 
       {/* Logo */}
